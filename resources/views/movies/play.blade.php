@@ -4,8 +4,10 @@
 
 <div x-data="{ 
     currentEpisode: '{{ $episodes[0]['link_embed'] }}',
+    currentSlug: '{{ $episodes[0]['slug'] }}',
     updateUrl(slug) {
-        history.pushState(null, '', `?episode=${slug}`);
+        this.currentSlug = slug;
+        history.pushState(null, '', `?${slug}`);
         this.currentEpisode = this.$refs[`episode_${slug}`].dataset.link;
     }
 }" class="container mx-auto">
@@ -22,7 +24,8 @@
                             x-ref="episode_{{ $episode['slug'] }}"
                             data-link="{{ $episode['link_embed'] }}"
                             @click="updateUrl('{{ $episode['slug'] }}')"
-                            class="inline-block bg-gray-500 text-white rounded font-semibold mr-2 px-3 py-2 hover:bg-gray-600 transition ease-in-out duration-150"
+                            :class="currentSlug === '{{ $episode['slug'] }}' ? 'bg-orange-500 hover:bg-orange-600' : 'bg-gray-500 hover:bg-gray-600'"
+                            class="inline-block text-white rounded font-semibold mr-2 px-3 py-2 transition ease-in-out duration-150"
                         >
                             <span>{{ $episode['name'] }}</span>
                         </button>

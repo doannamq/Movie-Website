@@ -10,7 +10,7 @@
                 <x-movie-card :movie="$movie"/>
             @endforeach
         </div>
-        <div class="flex justify-center items-center mb-4">
+        {{-- <div class="flex justify-center items-center mb-4">
             <div class="w-96 flex justify-around">
                 <a href="{{ route('movies.index', ['page' => $previous]) }}">
                     <button class="bg-gray-500 text-white font-semibold px-4 py-2 rounded">Previous</button>
@@ -19,7 +19,7 @@
                     <button class="bg-gray-500 text-white font-semibold px-4 py-2 rounded">Next</button>
                 </a>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 @endsection

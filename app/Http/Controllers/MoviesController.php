@@ -10,19 +10,12 @@ class MoviesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public $page;
     public function index($page = 1)
     {
         $newMovies = Http::get("https://phimapi.com/danh-sach/phim-moi-cap-nhat?page=" . $page)->json()['items'];
 
-        $previous = $page > 1 ? $page - 1 : null;
-
-        $next = $page < 500 ? $page + 1 : null;
-
         return view('movies.index', [
             "newMovies" => $newMovies,
-            "previous" => $previous,
-            "next" => $next
         ]);
     }
     /**
@@ -74,6 +67,8 @@ class MoviesController extends Controller
     public function play(string $id)
     {
         $episodes = Http::get("https://phimapi.com/phim/" . $id)->json()["episodes"][0]['server_data'];
+
+        dump($episodes);
 
         return view('movies.play', [
             "episodes" => $episodes
