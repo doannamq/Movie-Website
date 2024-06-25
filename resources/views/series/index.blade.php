@@ -5,8 +5,8 @@
     <div class="popular-movies">
         <h2 class="uppercase tracking-wider text-orange-500 font-bold">Phim bộ</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-            @foreach ($series as $serie)
-                <x-serie-card :serie="$serie"/>
+            @foreach ($series as $movie)
+                <x-serie-card :movie="$movie"/>
             @endforeach
         </div>
         <div class="flex justify-center items-center mb-4">

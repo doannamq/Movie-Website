@@ -8,10 +8,10 @@ use Illuminate\View\Component;
 
 class FeatureMovieCard extends Component
 {
-    public $featureMovie;
-    public function __construct($featureMovie)
+    public $movie;
+    public function __construct($movie)
     {
-        $this->featureMovie = $featureMovie;
+        $this->movie = $movie;
     }
     /**
      * Get the view / contents that represent the component.

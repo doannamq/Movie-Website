@@ -5,8 +5,8 @@
     <div class="popular-movies">
         <h2 class="uppercase tracking-wider text-orange-500 font-bold">Phim hoạt hình</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-            @foreach ($animes as $anime)
-                <x-anime-card :anime="$anime"/>
+            @foreach ($animes as $movie)
+                <x-anime-card :movie="$movie"/>
             @endforeach
         </div>
         <div class="flex justify-center items-center mb-4">

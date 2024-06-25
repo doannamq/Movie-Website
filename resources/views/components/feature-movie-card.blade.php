@@ -1,11 +1,11 @@
 <div class="mt-8 mb-12">
-    <a href="{{route("feature-movies.show", $featureMovie['slug'])}}">
-        <img src="{{$featureMovie['poster_url']}}" alt="poster" class="hover:opacity-75 transition ease-in-out duration-150 h-96">
+    <a href="{{route("feature-movies.show", $movie['slug'])}}">
+        <img src="{{$movie['poster_url']}}" alt="poster" class="hover:opacity-75 transition ease-in-out duration-150 h-96">
     </a>
     <div class="mt-2">
-        <a href="{{route("feature-movies.show", $featureMovie['slug'])}}">{{$featureMovie['name']}}</a>
+        <a href="{{route("feature-movies.show", $movie['slug'])}}">{{$movie['name']}}</a>
     </div>
     <div class="mt2">
-        <p class="text-sm text-gray-400">Năm chiếu: {{$featureMovie['year']}}</p>
+        <p class="text-sm text-gray-400">Năm chiếu: {{$movie['year']}}</p>
     </div>
 </div>

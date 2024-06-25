@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Comment;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
 use function PHPSTORM_META\map;
 use Illuminate\Support\Facades\Http;
 
@@ -28,6 +30,7 @@ class MoviesController extends Controller
             "detailMovies" => collect($detailMovies)->take(5),
         ]);
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -51,6 +54,17 @@ class MoviesController extends Controller
     {
         $movieRaw = Http::get("https://phimapi.com/phim/" . $id)->json()["movie"];
 
+        $comments = Comment::with('user')->where('movie_id', $movieRaw['slug'])->get();
+
+        // $comments = $comments->toArray();
+        $comments = collect($comments)->map(function ($comment) {
+            return collect($comment)->merge([
+                "created_at" => Carbon::parse($comment->created_at)->format('d-m-Y')
+            ]);
+        });
+
+        $comments = $comments->toArray();
+
         $status = "";
 
         if ($movieRaw['status'] == "completed") {
@@ -70,15 +84,14 @@ class MoviesController extends Controller
         ]);
 
         return view('movies.show', [
-            "movie" => $movie
+            "movie" => $movie,
+            "comments" => $comments
         ]);
     }
 
     public function play(string $id)
     {
         $episodes = Http::get("https://phimapi.com/phim/" . $id)->json()["episodes"][0]['server_data'];
-
-        dump($episodes);
 
         return view('movies.play', [
             "episodes" => $episodes

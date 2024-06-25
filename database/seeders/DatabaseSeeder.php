@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Comment;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,5 +21,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'doannamq@gmail.com',
             'password' => bcrypt('nam240403')
         ]);
+
+        Comment::factory(5)->create();
     }
 }

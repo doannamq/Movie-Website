@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnimesController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeatureMoviesController;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\ProfileController;
@@ -12,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [MoviesController::class, 'index'])->name('movies.index');
 Route::get('/movies/{movie}', [MoviesController::class, 'show'])->name('movies.show');
 Route::get('/play/{movie}', [MoviesController::class, 'play'])->name('movies.play');
+
+//Comment
+Route::post('/movies/{movie}/comments', [CommentController::class, 'store'])->name('comments.store')->middleware('auth');
 
 //Feature Movies
 Route::get('/feature-movies/page/{page?}', [FeatureMoviesController::class, 'index'])->name('feature-movies.index');

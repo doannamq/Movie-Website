@@ -69,7 +69,7 @@
 
             <div class="mb-6 flex justify-center">
                 <button type="submit" class="bg-orange-500 rounded py-2 px-4 hover:bg-orange-600">
-                    Sign up
+                    Đăng ký
                 </button>
             </div>
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -56,6 +58,17 @@ class AnimesController extends Controller
     {
         $animeRaw = Http::get("https://phimapi.com/phim/" . $id)->json()["movie"];
 
+        $comments = Comment::with('user')->where('movie_id', $animeRaw['slug'])->get();
+
+        // $comments = $comments->toArray();
+        $comments = collect($comments)->map(function ($comment) {
+            return collect($comment)->merge([
+                "created_at" => Carbon::parse($comment->created_at)->format('d-m-Y')
+            ]);
+        });
+
+        $comments = $comments->toArray();
+
         $status = "";
 
         if ($animeRaw['status'] == "completed") {
@@ -75,7 +88,8 @@ class AnimesController extends Controller
         ]);
 
         return view('animes.show', [
-            "anime" => $anime
+            "movie" => $anime,
+            "comments" => $comments
         ]);
     }
 

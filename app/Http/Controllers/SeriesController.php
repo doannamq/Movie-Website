@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -55,6 +57,17 @@ class SeriesController extends Controller
     {
         $serieRaw = Http::get("https://phimapi.com/phim/" . $id)->json()["movie"];
 
+        $comments = Comment::with('user')->where('movie_id', $serieRaw['slug'])->get();
+
+        // $comments = $comments->toArray();
+        $comments = collect($comments)->map(function ($comment) {
+            return collect($comment)->merge([
+                "created_at" => Carbon::parse($comment->created_at)->format('d-m-Y')
+            ]);
+        });
+
+        $comments = $comments->toArray();
+
         $status = "";
 
         if ($serieRaw['status'] == "completed") {
@@ -74,7 +87,8 @@ class SeriesController extends Controller
         ]);
 
         return view('series.show', [
-            "serie" => $serie
+            "movie" => $serie,
+            "comments" => $comments
         ]);
     }
 
