@@ -4,3 +4,14 @@
 .spinner {
     position: absolute;
 }
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.truncate {
+    display: -webkit-box; /* Sử dụng Flexbox cũ của Webkit để tạo các hộp linh hoạt */
+    -webkit-box-orient: vertical; /* Đặt hướng cho Flexbox */
+    -webkit-line-clamp: 3; /* Số dòng bạn muốn giới hạn */
+    overflow: hidden; /* Ẩn phần nội dung bị tràn */
+    text-overflow: ellipsis; /* Thêm dấu ba chấm cho phần bị cắt */
+    white-space: normal; /* Đặt lại white-space để dòng văn bản có thể ngắt */
+}

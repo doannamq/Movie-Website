@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+
+use function PHPSTORM_META\map;
 use Illuminate\Support\Facades\Http;
 
 class MoviesController extends Controller
@@ -14,8 +17,15 @@ class MoviesController extends Controller
     {
         $newMovies = Http::get("https://phimapi.com/danh-sach/phim-moi-cap-nhat?page=" . $page)->json()['items'];
 
+        $popularMovies = Http::get("https://phimapi.com/danh-sach/phim-moi-cap-nhat?page=" . $page)->json()['items'];
+
+        $detailMovies = collect($popularMovies)->take(5)->map(function ($movie) {
+            return  Http::get("https://phimapi.com/phim/" . $movie['slug'])->json()["movie"];
+        });
+
         return view('movies.index', [
             "newMovies" => $newMovies,
+            "detailMovies" => collect($detailMovies)->take(5),
         ]);
     }
     /**

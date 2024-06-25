@@ -35,4 +35,5 @@
             </div>
         </div>
     </div>
+   <x-comment/>
 @endsection

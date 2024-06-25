@@ -27,9 +27,9 @@
               <a href="{{route('animes.index')}}" class="hover:text-gray-300">Phim hoạt hình</a>
             </li>
           </ul>
-          <div class="flex flex-col md:flex-row items-center">        
+          {{-- <div class="flex flex-col md:flex-row items-center">        
             @livewire('search-drop-down')
-          </div>
+          </div> --}}
           
           @auth
           <ul class="flex space-x-6 mr-6">
@@ -42,7 +42,7 @@
                   <form class="inline" method="POST" action="/logout">
                       @csrf
                       <button type="submit" >
-                          Logout
+                          Đăng xuất
                       </button>
                   </form>
               </li>
@@ -62,7 +62,10 @@
           </ul>
           @endauth
         </div>
-    </nav>
+        <div class="flex flex-col md:flex-row items-center justify-center mt-3">        
+          @livewire('search-drop-down')
+        </div>
+  </nav>
     @yield('content')
     @livewireScripts
 </body>

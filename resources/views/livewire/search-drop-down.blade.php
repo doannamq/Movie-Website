@@ -23,14 +23,14 @@
     <div wire:loading class="spinner top-0 right-0 mr-4 mt-4"></div>
 
     @if (strlen($search) >= 2)
-        <div class="absolute bg-gray-800 text-sm rounded w-64 mt-4 z-50" 
+        <div class="absolute bg-gray-800 text-sm rounded w-64 md:w-64 lg:w-96 mt-4 z-50" 
         x-show.opacity="isOpen"
         @keydown.escape.window="isOpen = false"
         >    
             @if (count($searchResults) > 0)    
                 <ul> 
                     @foreach ($searchResults as $result)
-                        <li class="border-b border-gray-700">
+                        <li class="border-b border-gray-700 w-64 md:w-64 lg:w-96">
                             <a 
                                 href="{{route('movies.show', $result['slug'])}}" 
                                 class=" hover:bg-gray-700 px-3 py-3 flex items-center"
